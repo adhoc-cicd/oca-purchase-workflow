@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 from odoo import _, api, exceptions, fields, models
+from odoo.tools import float_is_zero
 
 
 class PurchaseOrder(models.Model):
@@ -63,10 +64,28 @@ class PurchaseOrder(models.Model):
         for po in self:
             for line in po.order_line:
                 for request_line in line.purchase_request_lines:
-                    if request_line.sudo().purchase_state == "done":
+                    if request_line.sudo().purchase_state == "done" and not float_is_zero(
+                        line.product_qty, precision_rounding=line.product_uom.rounding
+                    ):
                         raise exceptions.UserError(
-                            _("Purchase Request %s has already been completed")
-                            % request_line.request_id.name
+                            _(
+                                "Purchase Request %s has already been completed for product: %s"
+                            )
+                            % (
+                                request_line.request_id.name,
+                                request_line.product_id.name,
+                            )
+                        )
+                    if (
+                        request_line.sudo().purchased_qty
+                        + line.product_uom._compute_quantity(
+                            line.product_qty, request_line.sudo().product_uom_id
+                        )
+                        > request_line.sudo().product_qty
+                    ):
+                        raise exceptions.Warning(
+                            _("Product %s exceed the Purchase Request %s quantities")
+                            % (line.product_id.name, request_line.request_id.name)
                         )
         return True
 
