@@ -303,7 +303,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             date_required = item.line_id.date_required
             po_line.date_planned = datetime(
                 date_required.year, date_required.month, date_required.day
-            )
+            ).utcnow()
             res.append(purchase.id)
 
         return {
