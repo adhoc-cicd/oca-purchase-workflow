@@ -116,6 +116,7 @@ class StockMoveLine(models.Model):
                     ml.move_id.picking_id.message_post(
                         body=picking_message,
                         subtype_id=self.env.ref("mail.mt_comment").id,
+                        body_is_html=True,
                     )
 
                 allocation._compute_open_product_qty()
