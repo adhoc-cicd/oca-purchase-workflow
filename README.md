@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [purchase_order_line_menu](purchase_order_line_menu/) | 18.0.1.0.0 |  | Adds Purchase Order Lines Menu
 [purchase_order_type](purchase_order_type/) | 18.0.1.0.0 |  | Purchase Order Type
 [purchase_request](purchase_request/) | 18.0.1.0.0 |  | Use this module to have notification of requirements of materials and/or external services and keep track of such requirements.
+[purchase_request_department](purchase_request_department/) | 18.0.1.0.0 |  | Purchase Request Department
 
 [//]: # (end addons)
 
