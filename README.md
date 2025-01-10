@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [purchase_order_type](purchase_order_type/) | 18.0.1.0.0 |  | Purchase Order Type
 [purchase_request](purchase_request/) | 18.0.1.0.1 |  | Use this module to have notification of requirements of materials and/or external services and keep track of such requirements.
 [purchase_request_department](purchase_request_department/) | 18.0.1.0.0 |  | Purchase Request Department
+[vendor_transport_lead_time](vendor_transport_lead_time/) | 18.0.1.0.0 |  | Purchase delay based on transport and supplier delays
 
 [//]: # (end addons)
 
