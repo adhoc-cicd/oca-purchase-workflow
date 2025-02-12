@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [purchase_commercial_partner](purchase_commercial_partner/) | 18.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Add stored related field 'Commercial Supplier' on POs
 [purchase_deposit](purchase_deposit/) | 18.0.1.0.0 |  | Option to create deposit from purchase order
 [purchase_exception](purchase_exception/) | 18.0.1.0.0 |  | Custom exceptions on purchase order
+[purchase_invoice_plan](purchase_invoice_plan/) | 18.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Add to purchases order, ability to manage future invoice plan
 [purchase_last_price_info](purchase_last_price_info/) | 18.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Purchase Product Last Price Info
 [purchase_open_qty](purchase_open_qty/) | 18.0.1.0.0 |  | Allows to identify the purchase orders that have quantities pending to invoice or to receive.
 [purchase_order_archive](purchase_order_archive/) | 18.0.1.0.0 |  | Archive Purchase Orders
