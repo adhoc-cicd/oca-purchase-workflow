@@ -19,11 +19,31 @@ class PurchaseOrder(models.Model):
 
     def _compute_all_pickings(self):
         for rec in self:
+            all_picking_ids = set()
             groups = rec.mapped("picking_ids.group_id")
-            all_picking_ids = self.env["stock.picking"].search(
-                [("group_id", "in", groups.ids)]
-            )
-            rec.all_picking_ids = all_picking_ids
+            if groups:
+                group_pickings = self.env["stock.picking"].search(
+                    [("group_id", "in", groups.ids)]
+                )
+                all_picking_ids.update(group_pickings.ids)
+            # add pickings connected by move_orig_ids (multi-steps) - recursively
+            for line in rec.order_line:
+                for move in line.move_ids:
+                    self._add_connected_pickings(move, all_picking_ids)
+            rec.all_picking_ids = self.env["stock.picking"].browse(list(all_picking_ids))
+
+    def _add_connected_pickings(self, move, all_picking_ids):
+        """Recursively add all pickings connected through move_orig_ids"""
+        # Find moves that have this move as origin
+        next_moves = self.env['stock.move'].search([
+            ('move_orig_ids', 'in', move.ids)
+        ])
+        for next_move in next_moves:
+            if next_move.picking_id:
+                if next_move.picking_id.id not in all_picking_ids:
+                    all_picking_ids.add(next_move.picking_id.id)
+                    # Recursively search for more connected moves
+                    self._add_connected_pickings(next_move, all_picking_ids)
 
     def action_view_all_pickings(self):
         return self._get_action_view_all_pickings(self.all_picking_ids)
