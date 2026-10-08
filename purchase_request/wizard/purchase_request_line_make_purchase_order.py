@@ -201,7 +201,6 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             ("name", "=", vals["name"]),
             ("product_id", "=", item.product_id.id),
             ("product_uom", "=", vals["product_uom"]),
-            ("analytic_distribution", "=?", item.line_id.analytic_distribution),
         ]
         if self.sync_data_planned:
             date_required = item.line_id.date_required
